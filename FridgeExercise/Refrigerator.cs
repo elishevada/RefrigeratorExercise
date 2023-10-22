@@ -32,7 +32,7 @@ namespace FridgeExercise
 
 		public override string ToString()
 		{
-			return "Refrigerator: Model:" + Model + "Color: " + Color+ "NumberOfShelves:"+ NumberOfShelves+"";
+			return "Refrigerator: Model:  " + Model + "Color: " + Color+ "NumberOfShelves:  "+ NumberOfShelves+"";
 		}
 
 		public double SpaceIsLeftInTheFridge()
@@ -71,6 +71,7 @@ namespace FridgeExercise
 						tempItem = item;
 						shelf.CurrentSpaceInShelf+=item.SpaceItTakes;
 						shelf.Items.Remove(item);
+						break;
 					}
 				}
 			}
@@ -83,18 +84,20 @@ namespace FridgeExercise
 		}
 		public void FridgeCleaning()
 		{
-			foreach(Shelf shelf in Shelves)
+			List<Item> AllRemovedItems = new List<Item>();
+			foreach (Shelf shelf in Shelves)
 			{
 				foreach(Item item in shelf.Items)
 				{
 					if (DateTime.Compare(DateTime.Now, item.ExpiryDate) > 0)
 					{
 						shelf.CurrentSpaceInShelf -= item.SpaceItTakes;
-
+						AllRemovedItems.Add(item);
 						shelf.Items.Remove(item);
 					}
 				}
 			}
+
 		}
 		public void WhatDoIWantToEat(string type,string kosherType)
 		{
@@ -109,7 +112,7 @@ namespace FridgeExercise
 				}
 			}
 		}
-		public void SortItems()
+		public void SortItemsByDate()
 		{
 			List<Item> AllItems= new List<Item>();
 			foreach (Shelf shelf in Shelves)
@@ -131,9 +134,9 @@ namespace FridgeExercise
 				Console.WriteLine(item.ToString());
 			}
 		}
-		public void SortShelves()
+		public void SortShelvesBySpace(List<Shelf> shelves)
 		{
-			List<Shelf> sortedShelvesList= Shelves.OrderByDescending(x => x.CurrentSpaceInShelf).ToList();
+			List<Shelf> sortedShelvesList= shelves.OrderByDescending(x => x.CurrentSpaceInShelf).ToList();
 			//Shelves.Sort((x, y) => y.CurrentSpaceInShelf.CompareTo(x.CurrentSpaceInShelf));
 			foreach (Shelf shelf in sortedShelvesList)
 			{
