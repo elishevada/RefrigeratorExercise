@@ -13,7 +13,7 @@ namespace FridgeExercise
 		private int CounterID = 1;
 		public string Name { get; set; }
 		public DateTime ExpiryDate { get; set; }
-		public int SpaceItTakes { get; set; }
+		public double SpaceItTakes { get; set; }
 		public Shelf ItemBelongsToShelf { get; set; }
 		
 		public KosherTypeEnum KosherType { get; set; }
@@ -30,7 +30,7 @@ namespace FridgeExercise
 			Meat,
 			Parve
 		}
-		public Item(string name, int year,int month,int day, int spaceItTakes, KosherTypeEnum kosherType, TypeEnum type)
+		public Item(string name, int year,int month,int day, double spaceItTakes, KosherTypeEnum kosherType, TypeEnum type)
 		{
 			ItemID = CounterID;
 			CounterID++;

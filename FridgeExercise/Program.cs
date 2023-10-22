@@ -11,7 +11,7 @@ namespace FridgeExercise
 	
 	internal class Program
 	{
-		public void SortedRefrigerators(List<Refrigerator> AllRefrigerators)
+		public void SorteRefrigerators(List<Refrigerator> AllRefrigerators)
 		{
 			AllRefrigerators.Sort((x, y) => y.SpaceIsLeftInTheFridge().CompareTo(x.SpaceIsLeftInTheFridge()));
 			//to work on a copied list do orderbydescending

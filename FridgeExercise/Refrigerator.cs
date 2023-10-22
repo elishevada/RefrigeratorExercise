@@ -35,9 +35,9 @@ namespace FridgeExercise
 			return "Refrigerator: Model:" + Model + "Color: " + Color+ "NumberOfShelves:"+ NumberOfShelves+"";
 		}
 
-		public int SpaceIsLeftInTheFridge()
+		public double SpaceIsLeftInTheFridge()
 		{
-			int currentSpace = 0;
+			double currentSpace = 0;
 			foreach (Shelf shelf in Shelves)
 			{
 				currentSpace += shelf.CurrentSpaceInShelf;
@@ -57,6 +57,7 @@ namespace FridgeExercise
 					return;
 				}
 			}
+			Console.WriteLine("There is no  space for this item");
 		}
 		public string TakeOutItem(int ItemId)
 		{
