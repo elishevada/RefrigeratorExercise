@@ -90,6 +90,7 @@ namespace FridgeExercise
 					if (DateTime.Compare(DateTime.Now, item.ExpiryDate) > 0)
 					{
 						shelf.CurrentSpaceInShelf -= item.SpaceItTakes;
+
 						shelf.Items.Remove(item);
 					}
 				}
