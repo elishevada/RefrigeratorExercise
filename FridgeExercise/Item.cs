@@ -13,43 +13,37 @@ namespace FridgeExercise
 		private int CounterID = 1;
 		public string Name { get; set; }
 		public DateTime ExpiryDate { get; set; }
-		public double SpaceItTakes { get; set; }
+		public int SpaceItTakes { get; set; }
 		public Shelf ItemBelongsToShelf { get; set; }
-		//enum Type
-		//{
-		//	Food,
-		//	Drink
-		//}
-		//enum KosherType
-		//{
-		//	Dairy,
-		//	Meat,
-		//	Parve
-		//}
-		public KosherType KosherType { get; set; }
-		public Type Type { get; set; }
+		
+		public KosherTypeEnum KosherType { get; set; }
+		public TypeEnum Type { get; set; }
 
-		public enum Type
+		public enum TypeEnum
 		{
 			Food,
 			Drink
 		}
-		public enum KosherType
+		public enum KosherTypeEnum
 		{
 			Dairy,
 			Meat,
 			Parve
 		}
-		public Item(string name, DateTime expiryDate, double spaceItTakes, Shelf itemBelongsToShelf, KosherType kosherType, Type type)
+		public Item(string name, int year,int month,int day, int spaceItTakes, KosherTypeEnum kosherType, TypeEnum type)
 		{
 			ItemID = CounterID;
 			CounterID++;
 			Name = name;
-			ExpiryDate = expiryDate;
+			ExpiryDate = new DateTime(year, month, day); 
 			SpaceItTakes = spaceItTakes;
-			ItemBelongsToShelf = itemBelongsToShelf;
 			KosherType = kosherType;
 			Type = type;
+		}
+
+		public override string ToString()
+		{
+			return "Item: Name:" + Name + "    ExpiryDate: " + ExpiryDate + "    SpaceItTakes:" + SpaceItTakes + "  KosherType:" + KosherType + "  Type:" + Type +" Foor:" + ItemBelongsToShelf.ShelfsFloor + "";
 		}
 	}
 }
