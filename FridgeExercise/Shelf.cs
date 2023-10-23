@@ -18,18 +18,18 @@ namespace FridgeExercise
 		public List<Item> Items { get; set; }
 		public double CurrentSpaceInShelf { get; set; }
 
-		public Shelf(int shelfsFloor, double spaceInShelf/*, List<Item> items*/) {
+		public Shelf(int shelfsFloor, double spaceInShelf) {
 			ShelfID = CounterID;
 			CounterID++;
 			ShelfsFloor = shelfsFloor;
 			SpaceInShelf = spaceInShelf;
 			CurrentSpaceInShelf = spaceInShelf;
-			Items = new List<Item>(/*items*/);
+			Items = new List<Item>();
 
 		}
-		public override string ToString()
+		public string ToString(Shelf shelf)
 		{
-			return" Shelf: shelfsFloor:" + ShelfsFloor +" SpaceInShelf: " + SpaceInShelf;
+			return" Shelf: shelfsFloor:" + shelf.ShelfsFloor + " SpaceInShelf: " + shelf.SpaceInShelf+ " CurrentSpaceInShelf: " + shelf.CurrentSpaceInShelf;
 		}
 	}
 }

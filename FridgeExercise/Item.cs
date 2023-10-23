@@ -65,13 +65,12 @@ namespace FridgeExercise
 				default:
 					throw new ArgumentOutOfRangeException();
 			}
-			//KosherType = kosherType;
-			//Type = type;
+			
 		}
 
-		public override string ToString()
+		public string ToString(Item item)
 		{
-			return "Item: Name:" + Name + "    ExpiryDate: " + ExpiryDate + "    SpaceItTakes:" + SpaceItTakes + "  KosherType:" + KosherType + "  Type:" + Type +" Foor:" + ItemBelongsToShelf.ShelfsFloor + "";
+			return "Item: Name:" + item.Name + "    ExpiryDate: " + item.ExpiryDate + "    SpaceItTakes:" + item.SpaceItTakes + "  KosherType:" + item.KosherType + "  Type:" + Type +" Foor:" + item.ItemBelongsToShelf.ShelfsFloor + "";
 		}
 	}
 }

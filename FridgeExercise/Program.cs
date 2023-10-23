@@ -14,23 +14,23 @@ namespace FridgeExercise
 	{
 		public void SortheRefrigerators(List<Refrigerator> AllRefrigerators)
 		{
-			AllRefrigerators.Sort((x, y) => y.SpaceIsLeftInTheFridge().CompareTo(x.SpaceIsLeftInTheFridge()));
+			AllRefrigerators.Sort((x, y) => y.SpaceIsLeftInTheFridge(y.Shelves).CompareTo(x.SpaceIsLeftInTheFridge(x.Shelves)));
 			//to work on a copied list do orderbydescending
 			foreach (Refrigerator refrigerator in AllRefrigerators)
 			{
-				Console.WriteLine(refrigerator.ToString());
+				Console.WriteLine(refrigerator.ToString(refrigerator));
 			}
 			
 		}
 		public void PrintAllInTheFridge(Refrigerator refrigerator)
 		{
-			Console.WriteLine(refrigerator.ToString());
+			Console.WriteLine(refrigerator.ToString(refrigerator));
 			foreach (Shelf shelf in refrigerator.Shelves)
 			{
-				Console.WriteLine(shelf.ToString());
+				Console.WriteLine(shelf.ToString(shelf));
 				foreach (Item item in shelf.Items)
 				{
-					Console.WriteLine(item.ToString());
+					Console.WriteLine(item.ToString(item));
 				}
 			}
 		}
@@ -39,7 +39,7 @@ namespace FridgeExercise
 			if (typeToEat == "Food" || typeToEat == "Drink")
 			{
 				if (KosherTypeToEat == "Parve" || KosherTypeToEat == "Dairy" || KosherTypeToEat == "Meat")
-					fridge.WhatDoIWantToEat(typeToEat, KosherTypeToEat);
+					fridge.WhatDoIWantToEat(typeToEat, KosherTypeToEat, fridge.Shelves);
 				else
 					Console.WriteLine("There is no such a type:" + typeToEat);
 			}
@@ -85,7 +85,7 @@ namespace FridgeExercise
 					if (kosherType == "Parve" || kosherType == "Dairy" || kosherType == "Meat")
 					{
 						Item itemToInsert = new Item(name, year, month, day, spaceItTakes, kosherType, type);
-						fridge.PutItemInTheFridge(itemToInsert);
+						fridge.PutItemInTheFridge(itemToInsert, fridge.Shelves);
 					}
 					else
 						Console.WriteLine("There is no such a type:" + type);
@@ -114,23 +114,33 @@ namespace FridgeExercise
 			Item item22 = new Item("chily", 2023, 10, 22, 10, "Parve", "Drink");
 			Item item23 = new Item("meat", 2023, 10, 17, 30, "Meat", "Food");
 			Item item24 = new Item("chocolate", 2023, 10, 20, 5, "Dairy", "Drink");
-			refrigerator2.PutItemInTheFridge(item21);
-			refrigerator2.PutItemInTheFridge(item22);
-			refrigerator2.PutItemInTheFridge(item23);
-			refrigerator2.PutItemInTheFridge(item24);
+			refrigerator2.PutItemInTheFridge(item21, refrigerator2.Shelves);
+			refrigerator2.PutItemInTheFridge(item22, refrigerator2.Shelves);
+			refrigerator2.PutItemInTheFridge(item23, refrigerator2.Shelves);
+			refrigerator2.PutItemInTheFridge(item24, refrigerator2.Shelves);
 
 
 
 			Refrigerator refrigerator=new Refrigerator("samsung","gray",4);
 			allRefrigerators.Add(refrigerator);
-			refrigerator.Shelves.Add(new Shelf(1, 30));
-			refrigerator.Shelves.Add(new Shelf(2, 30));
-			refrigerator.Shelves.Add(new Shelf(3, 30));
-			refrigerator.Shelves.Add(new Shelf(4, 25));
-			//refrigerator.PutItemInTheFridge(new Item("milk", 2023, 10, 25, 3.5, "Dairy", "Drink"));
+			refrigerator.Shelves.Add(new Shelf(1, 10));
+			refrigerator.Shelves.Add(new Shelf(2, 10));
+			refrigerator.Shelves.Add(new Shelf(3, 10));
+			refrigerator.Shelves.Add(new Shelf(4, 10));
+			//refrigerator.PutItemInTheFridge(new Item("milk2", 2023, 10, 30, 2, "Dairy", "Drink"), refrigerator.Shelves);
+			//refrigerator.PutItemInTheFridge(new Item("chily0", 2023, 10, 22, 4, "Parve", "Drink"), refrigerator.Shelves);
+			////refrigerator.PutItemInTheFridge(new Item("meat0", 2023, 10, 17, 10, "Meat", "Food"), refrigerator.Shelves);
+			////refrigerator.PutItemInTheFridge(new Item("chocolate", 2024, 10, 20, 5, "Dairy", "Drink"), refrigerator.Shelves);
+			//refrigerator.PutItemInTheFridge(new Item("milk", 2023, 10, 25, 10, "Dairy", "Drink"), refrigerator.Shelves);
+			////refrigerator.PutItemInTheFridge(new Item("meat", 2023, 10, 27, 15, "Meat", "Drink"), refrigerator.Shelves);
+			//refrigerator.PutItemInTheFridge(new Item("meat2", 2023, 10, 31, 2, "Meat", "Drink"), refrigerator.Shelves);
+			//refrigerator.PutItemInTheFridge(new Item("chily1", 2023, 10, 24, 10, "Parve", "Drink"), refrigerator.Shelves);
+			////refrigerator.PutItemInTheFridge(new Item("milk0", 2023, 10, 20, 19, "Dairy", "Drink"), refrigerator.Shelves);
+			//refrigerator.PutItemInTheFridge(new Item("chily2", 2023, 10, 30, 10, "Parve", "Drink"), refrigerator.Shelves);
+			//refrigerator.PutItemInTheFridge(new Item("meat3", 2023, 11, 01, 1, "Meat", "Drink"), refrigerator.Shelves);
 
 
-			int action=0;
+			int action =0;
 			string takeOutItemName="",typeToEat="",KosherTypeToEat="";
 			
 
@@ -166,52 +176,11 @@ namespace FridgeExercise
 						ThisProgramObject.PrintAllInTheFridge(refrigerator);
 						break;
 					case 2:
-						Console.WriteLine("There are  "+ refrigerator.SpaceIsLeftInTheFridge()+ " square meters");
+						Console.WriteLine("There are  "+ refrigerator.SpaceIsLeftInTheFridge(refrigerator.Shelves) + " square meters");
 						break;
 					case 3:
 						ThisProgramObject.InsertItem(refrigerator);
-						//Console.WriteLine("Insert an Item:");
-						//Console.WriteLine("Name:");
-						//name = Console.ReadLine();
-						//Console.WriteLine("Expired date:in this tamplate:dd-mm-yyyy");
-						//expireDate = Console.ReadLine();
-						//dateSeperated = expireDate.Split('-');
-						//if (dateSeperated.Count() == 3) {
-						//	try {
-						//		var prevDate = new DateTime(Int32.Parse(dateSeperated[2]), Int32.Parse(dateSeperated[1]), Int32.Parse(dateSeperated[0]));
-						//		day = Int32.Parse(dateSeperated[0]);
-						//		month = Int32.Parse(dateSeperated[1]);
-						//		year = Int32.Parse(dateSeperated[2]);
-						//	}
-						//	catch
-						//	{
-						//		Console.WriteLine("The date is not correct");
-						//		break;
-						//	}
-
-						//}
-						//Console.WriteLine("How much room it takes in square meters ?:enter just a double number");
-						//spaceItTakes = double.Parse(Console.ReadLine());
-						//if (spaceItTakes > 0) {
-						//	Console.WriteLine("Is it Dairy Parve Or Meat:notice that you spell it right");
-						//	kosherType = Console.ReadLine();
-						//	Console.WriteLine("Is it a Drink or Food:notice that you spell it right");
-						//	type = Console.ReadLine();
-						//	if (type == "Food" || type == "Drink")
-						//	{
-						//		if (kosherType == "Parve" || kosherType == "Dairy" || kosherType == "Meat")
-						//		{
-						//			Item itemToInsert = new Item(name, year, month, day, spaceItTakes, kosherType, type);
-						//			refrigerator.PutItemInTheFridge(itemToInsert);
-						//		}
-						//		else
-						//			Console.WriteLine("There is no such a type:" + type);
-						//	}
-						//	else
-						//		Console.WriteLine("There is no such a kosherType: " + kosherType);
-
-						//}
-
+						
 						break;
 					case 4:
 						var temp = 0;
@@ -224,7 +193,7 @@ namespace FridgeExercise
 								if(item.Name == takeOutItemName)
 								{
 									temp = 1;
-									refrigerator.TakeOutItem(item.ItemID);
+									refrigerator.TakeOutItem(item.ItemID, refrigerator.Shelves);
 									Console.WriteLine("Succed to remove the item");
 									break;//if there are 2 or more dont break
 								}
@@ -234,25 +203,17 @@ namespace FridgeExercise
 							Console.WriteLine("The item dont exist");//both 
 						break;
 					case 5:
-						refrigerator.FridgeCleaning();//print all product had checked
+						refrigerator.FridgeCleaning(refrigerator.Shelves);//print all product had checked
 						break;
 					case 6:
 						Console.WriteLine("What do you want to eat:Food or Drink and Meat Dairy or Parve");
 						typeToEat=Console.ReadLine();
 						KosherTypeToEat=Console.ReadLine();
 						ThisProgramObject.CheckValidTypeItem(KosherTypeToEat, typeToEat,refrigerator);
-						//if (typeToEat == "Food" || typeToEat == "Drink")
-						//{
-						//	if (KosherTypeToEat == "Parve" || KosherTypeToEat == "Dairy" || KosherTypeToEat == "Meat")
-						//		refrigerator.WhatDoIWantToEat(typeToEat, KosherTypeToEat);
-						//	else
-						//		Console.WriteLine("There is no such a type:" + typeToEat );
-						//}
-						//else
-						//	Console.WriteLine("There is no such a kosherType: " + KosherTypeToEat);
+						
 						break;
 					case 7:
-						refrigerator.SortItemsByDate();
+						refrigerator.SortItemsByDate(refrigerator.Shelves);
 						break;
 					case 8:
 						refrigerator.SortShelvesBySpace(refrigerator.Shelves);
@@ -261,7 +222,7 @@ namespace FridgeExercise
 						ThisProgramObject.SortheRefrigerators(allRefrigerators);
 						break;
 					case 10:
-						refrigerator.GoingShopping();
+						refrigerator.GoingShopping(refrigerator.Shelves);
 						break;
 					case 100:
 						System.Environment.Exit(0);
@@ -275,14 +236,7 @@ namespace FridgeExercise
 
 			
 
-			//// Declare two dates
-			//var prevDate = new DateTime(2023, 10, 19); //15 July 2021
-			//var today = DateTime.Now;
-
-			////get difference of two dates
-			//var diffOfDates = today - prevDate;
-			//Console.WriteLine("Difference in Days: {0}", diffOfDates.Days);
-			//Console.WriteLine();
+			
 		}
 	}
 }
